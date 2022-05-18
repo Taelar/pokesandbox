@@ -1,6 +1,6 @@
 # Api
 
-Mock API done with [JSON Server](https://github.com/typicode/json-server), because we, front-end devs, don't have time for APIs.
+Mock API done with [JSON Server](https://github.com/typicode/json-server), because as a front-end dev I don't have time for APIs (but I do for IPAs).
 
 ## Usage
 
