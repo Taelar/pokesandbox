@@ -1,10 +1,4 @@
-# Poke Sandbox
-
-Sandbox project to try libs, using [PokeApi](https://pokeapi.co/) for data.
-
-## Used Libs
-
--
+# Front
 
 ## Available Scripts
 
