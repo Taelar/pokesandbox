@@ -9,7 +9,7 @@ export const MainLayout: FC = () => {
       <div className="w-72 bg-slate-900 p-4">
         <div className="my-8 text-slate-200 font-bold text-2xl text-center">Poke Sandbox</div>
         <div className="space-y-2 p-4">
-          <MainLayoutItem title="Pokedex" path="/" icon={<RiGitRepositoryFill />} />
+          <MainLayoutItem title="Pokedex" path="/pokemons" icon={<RiGitRepositoryFill />} />
           <MainLayoutItem title="Wazo" path="/wazo" icon={<RiPlaystationLine />} />
         </div>
       </div>

@@ -5,7 +5,7 @@ import { MainLayoutItemProps } from './MainLayoutItem.model'
 
 export const MainLayoutItem: FC<MainLayoutItemProps> = ({ title, path, icon }) => {
   const location = useLocation()
-  const isActive = location.pathname === path
+  const isActive = location.pathname.includes(path)
 
   return (
     <div

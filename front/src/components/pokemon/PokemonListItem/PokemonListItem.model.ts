@@ -1,5 +1,5 @@
-import { INamedApiResource, IPokemon } from 'pokeapi-typescript'
+import { Pokemon } from 'types'
 
 export interface PokemonListItemProps {
-  item: INamedApiResource<IPokemon>
+  item: Pokemon
 }

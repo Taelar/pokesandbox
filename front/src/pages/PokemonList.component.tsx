@@ -1,14 +1,14 @@
-// import { IApiResourceList, IPokemon } from 'pokeapi-typescript'
 import { FC } from 'react'
 import { useQuery } from 'react-query'
-import { IPokemon, INamedApiResourceList } from 'pokeapi-typescript'
 import { PokemonListItem } from 'components/pokemon'
+import { Pokemon } from 'types'
+import { Outlet } from 'react-router-dom'
 
-const pokemonListKey = 'pokemonList'
+const queryKey = 'pokemonList'
 
 export const PokemonList: FC = () => {
-  const pokemonQuery = useQuery<INamedApiResourceList<IPokemon>>(pokemonListKey, async () => {
-    const response = await fetch(`pokemon`)
+  const query = useQuery<Pokemon[]>(queryKey, async () => {
+    const response = await fetch(`/pokemons?limit=30`)
     if (response.ok) {
       return response.json()
     } else {
@@ -19,10 +19,11 @@ export const PokemonList: FC = () => {
   return (
     <div className="w-full h-full flex">
       <div className="w-52 h-full overflow-y-auto border-r border-slate-400">
-        {pokemonQuery.data?.results.map((item) => (
-          <PokemonListItem key={item.url} item={item} />
+        {query.data?.map((item) => (
+          <PokemonListItem key={item.id} item={item} />
         ))}
       </div>
+      <Outlet />
     </div>
   )
 }
