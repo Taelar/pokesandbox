@@ -15,7 +15,7 @@ export interface Pokemon {
   }
   moves: {
     level: LevelMove[]
-    thmh: LevelMove[]
+    tmhm: LevelMove[]
     egg: BasicMove
     tutor: BasicMove[]
     gen34: Gen34Move[]

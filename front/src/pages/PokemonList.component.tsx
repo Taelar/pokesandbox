@@ -23,7 +23,9 @@ export const PokemonList: FC = () => {
           <PokemonListItem key={item.id} item={item} />
         ))}
       </div>
-      <Outlet />
+      <div className="overflow-y-auto w-full">
+        <Outlet />
+      </div>
     </div>
   )
 }

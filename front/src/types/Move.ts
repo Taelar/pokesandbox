@@ -1,5 +1,5 @@
 export interface LevelMove {
-  learndat: string
+  learnedat: string
   name: string
   gen: string
 }
