@@ -18,7 +18,7 @@ export const PokemonList: FC = () => {
 
   return (
     <div className="w-full h-full flex">
-      <div className="w-52 h-full overflow-y-auto border-r border-slate-400">
+      <div className="w-96 h-full overflow-y-auto border-r border-slate-400">
         {query.data?.map((item) => (
           <PokemonListItem key={item.id} item={item} />
         ))}

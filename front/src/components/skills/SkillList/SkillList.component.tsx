@@ -7,7 +7,7 @@ export const SkillList: FC<SkillListProps> = ({ skills }) => {
       {skills.map(({ learnedat, name }) => (
         <>
           <span>{name}</span>
-          <span>{learnedat === '' ? 0 : learnedat}</span>
+          <span>{learnedat}</span>
         </>
       ))}
     </div>
