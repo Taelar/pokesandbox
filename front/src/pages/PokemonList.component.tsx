@@ -1,8 +1,10 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import { useQuery } from 'react-query'
 import { PokemonListItem } from 'components/pokemon'
 import { Pokemon } from 'types'
 import { Outlet } from 'react-router-dom'
+import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback, LoadingFallback } from 'components/shared'
 
 const queryKey = 'pokemonList'
 
@@ -12,7 +14,7 @@ export const PokemonList: FC = () => {
     if (response.ok) {
       return response.json()
     } else {
-      throw new Error(`${response.status}`)
+      throw new Error(`Error while fetching pokemon list`)
     }
   })
 
@@ -24,7 +26,11 @@ export const PokemonList: FC = () => {
         ))}
       </div>
       <div className="overflow-y-auto w-full">
-        <Outlet />
+        <ErrorBoundary fallbackRender={ErrorFallback}>
+          <Suspense fallback={<LoadingFallback />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   )

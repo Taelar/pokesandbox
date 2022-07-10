@@ -1,7 +1,9 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { RiGitRepositoryFill, RiPlaystationLine } from 'react-icons/ri'
 import { MainLayoutItem } from './MainLayoutItem'
+import { ErrorFallback, LoadingFallback } from 'components/shared'
+import { ErrorBoundary } from 'react-error-boundary'
 
 export const MainLayout: FC = () => {
   return (
@@ -14,7 +16,11 @@ export const MainLayout: FC = () => {
         </div>
       </div>
       <div className="h-full w-full overflow-y-auto overflow-x-hidden bg-slate-800">
-        <Outlet />
+        <ErrorBoundary fallbackRender={ErrorFallback}>
+          <Suspense fallback={<LoadingFallback />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   )
