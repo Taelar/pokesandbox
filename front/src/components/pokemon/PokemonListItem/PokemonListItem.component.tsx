@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { FavoriteButton } from 'components/shared'
 import { FC } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { PokemonListItemProps } from './PokemonListItem.model'
@@ -17,7 +18,10 @@ export const PokemonListItem: FC<PokemonListItemProps> = ({ item }) => {
         <span className="text-slate-700 font-bold text-base px-1 rounded bg-slate-400 capitalize">
           {item.id}
         </span>
-        <span className="text-slate-200 text-lg capitalize">{item.name}</span>
+        <div className="flex items-center text-slate-200 capitalize text-lg">
+          <span className="pr-2">{item.name}</span>
+          <FavoriteButton favorite={!!item.favorite} loading={false} />
+        </div>
       </div>
     </Link>
   )

@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback, LoadingFallback } from 'components/shared'
 
-const queryKey = 'pokemonList'
+const queryKey = 'pokemons'
 
 export const PokemonList: FC = () => {
   const query = useQuery<Pokemon[]>(queryKey, async () => {

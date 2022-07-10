@@ -59,4 +59,6 @@ export interface Pokemon {
     fleeflag: string[]
     entreeforestlevel: string[]
   }
+
+  favorite?: boolean
 }
