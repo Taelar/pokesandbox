@@ -27,16 +27,25 @@ export const usePokemonById = (id: string) =>
 export const usePokemonMutationById = (id: string) => {
   const queryClient = useQueryClient()
 
-  return useMutation(async (updatedData: Pokemon) => {
-    const url = `/${POKEMONS_QUERY_KEY}/${id}`
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(updatedData),
-    })
-    if (response.ok) {
-      queryClient.invalidateQueries([POKEMONS_QUERY_KEY, id])
-      queryClient.invalidateQueries([POKEMONS_QUERY_KEY])
-    }
-  })
+  return useMutation(
+    async (updatedData: Pokemon) => {
+      const url = `/${POKEMONS_QUERY_KEY}/${id}`
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(updatedData),
+      })
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error(`Unable to fetch pokemon n°${id}`)
+      }
+    },
+    {
+      onSuccess: (data, variables) => {
+        queryClient.invalidateQueries([POKEMONS_QUERY_KEY])
+        queryClient.setQueryData([POKEMONS_QUERY_KEY, variables.id], data)
+      },
+    },
+  )
 }
