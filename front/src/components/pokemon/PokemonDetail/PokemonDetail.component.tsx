@@ -1,38 +1,15 @@
 import { FavoriteButton } from 'components/shared'
 import { SkillList } from 'components/skills/SkillList'
 import { FC, useCallback } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
-import { Pokemon } from '../../../types/Pokemon'
-
-const queryKey = 'pokemons'
+import { usePokemonById, usePokemonMutationById } from '../../../hooks/queries/pokemon.queries'
 
 export const PokemonDetail: FC = () => {
   const { id } = useParams()
-  const queryClient = useQueryClient()
 
-  const query = useQuery<Pokemon>([queryKey, id], async ({ queryKey }) => {
-    const url = `/${queryKey[0]}/${queryKey[1]}`
-    const response = await fetch(url)
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Unable to fetch pokemon n°${id}`)
-    }
-  })
+  const query = usePokemonById(id ?? '')
 
-  const mutation = useMutation(async (updatedData: Pokemon) => {
-    const url = `/${queryKey}/${id}`
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(updatedData),
-    })
-    if (response.ok) {
-      queryClient.invalidateQueries([queryKey, id])
-      queryClient.invalidateQueries([queryKey])
-    }
-  })
+  const mutation = usePokemonMutationById(id ?? '')
 
   const handleFavorite = useCallback(() => {
     if (query.data) {

@@ -1,27 +1,17 @@
 import { FC, Suspense } from 'react'
-import { useQuery } from 'react-query'
 import { PokemonListItem } from 'components/pokemon'
-import { Pokemon } from 'types'
 import { Outlet } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback, LoadingFallback } from 'components/shared'
-
-const queryKey = 'pokemons'
+import { usePokemonList } from 'hooks/queries/pokemon.queries'
 
 export const PokemonList: FC = () => {
-  const query = useQuery<Pokemon[]>(queryKey, async () => {
-    const response = await fetch(`/pokemons?limit=30`)
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Error while fetching pokemon list`)
-    }
-  })
+  const pokemonList = usePokemonList()
 
   return (
     <div className="w-full h-full flex">
       <div className="w-96 h-full overflow-y-auto border-r border-slate-400">
-        {query.data?.map((item) => (
+        {pokemonList.data?.map((item) => (
           <PokemonListItem key={item.id} item={item} />
         ))}
       </div>
